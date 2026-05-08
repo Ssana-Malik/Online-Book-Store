@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BookNest</title>
+
+  <link rel="stylesheet" href="home.css" />
+  <link rel="icon" type="image/x-icon" href="image/logo.png" />
+  <link rel="stylesheet" href="cart.css" />
+</head>
+
+  <body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+      <div class="logo">
+        <img src="image/logo.png" alt="Logo" />
+        <span>BookNest</span>
+      </div>
+
+      <ul class="nav-links">
+        <li><a href="home.html" class="active">Home</a></li>
+        <li><a href="book.php">Books</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+        <li><a href="login.html">Login</a></li>
+      </ul>
+
+      <div class="nav-icons">
+        <img
+          src="image/shopping-cart.png"
+          alt="Cart"
+          class="cart-icon"
+          onclick="toggleCart()"
+        />
+      </div>
+    </nav>
+
+    <!-- Mid Section -->
+    <section class="mid_section">
+      <div class="overlay"></div>
+
+      <div class="mid_section-content">
+        <h1>Discover Your Next Favorite Book</h1>
+        <button class="shop-btn" onclick="location.href = 'book.php'">
+          Shop Now
+        </button>
+      </div>
+    </section>
+
+    <!-- BEST SELLERS -->
+    <section class="section">
+      <h2>Best Sellers</h2>
+
+      <div class="books">
+        <div class="book">
+          <img src="image/no_exit.png" />
+          <p>No Exit</p>
+          <span>Rs 1,050</span>
+        </div>
+
+        <div class="book">
+          <img src="image/woman_in_the_window.png" />
+          <p>The Women in the Window</p>
+          <span>RS 1,250</span>
+        </div>
+
+        <div class="book">
+          <img src="image/Book_3.png" />
+          <p>The Silent Patient</p>
+          <span>Rs 1,050</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEW ARRIVALS -->
+    <section class="section">
+      <h2>New Arrivals</h2>
+
+      <div class="books">
+        <div class="book">
+          <img src="image/gone_girl.png" />
+          <p>Gone Girl</p>
+          <span>Rs 1,200</span>
+        </div>
+
+        <div class="book">
+          <img src="image/girl_with_dragon_tattoo.png" />
+          <p>Girl with Dargon Tattoo</p>
+          <span>Rs 1,300</span>
+        </div>
+
+        <div class="book">
+          <img src="image/into_the_dark.png" />
+          <p>Into the Dark</p>
+          <span>Rs 1,100</span>
+        </div>
+      </div>
+    </section>
+
+  <!-- Cart Box -->
+  <div id="cartBox">
+    <h3>Your Cart</h3>
+    <div id="cartItems"></div>
+    <hr>
+    <div>Subtotal: Rs. <span id="subtotal">0</span></div>
+    <div>Shipping: Rs. 120</div>
+    <div style="font-weight: bold;">Total: Rs. <span id="total">0</span></div>
+    <button onclick="goToCheckout()"
+      style="margin-top: 10px; width: 100%; padding: 10px; background: #0d2b4d; color: white; border: none; cursor: pointer;">Checkout</button>
+  </div>
+  <div id="overlay" onclick="toggleCart()"></div>
+  
+    <script>
+    // Get cart from localStorage
+      function getCart() {
+        let cart = localStorage.getItem("cart");
+        return cart ? JSON.parse(cart) : [];
+      }
+
+      // Save cart to localStorage
+      function saveCart(cart) {
+        localStorage.setItem("cart", JSON.stringify(cart));
+      }
+
+      // Add to cart function
+      function addToCart(name, price, image, stock) {
+        let cart = getCart();
+        let existingItem = cart.find((item) => item.name === name);
+
+        if (existingItem) {
+          if (existingItem.qty + 1 > stock) {
+            alert(`Sorry! Only ${stock} copies available.`);
+            return;
+          }
+          existingItem.qty++;
+        } else {
+          if (1 > stock) {
+            alert(`Sorry! This book is out of stock.`);
+            return;
+          }
+          cart.push({
+            name: name,
+            price: price,
+            image: image,
+            qty: 1,
+            maxStock: stock,
+          });
+        }
+
+        saveCart(cart);
+        alert(`${name} added to cart!`);
+        loadCart();
+      }
+
+      // Load cart display
+      function loadCart() {
+        let cart = getCart();
+        let cartItemsDiv = document.getElementById("cartItems");
+        let subtotal = 0;
+
+        if (cart.length === 0) {
+          cartItemsDiv.innerHTML = "<p>Your cart is empty</p>";
+          document.getElementById("subtotal").innerText = "0";
+          document.getElementById("total").innerText = "0";
+          return;
+        }
+
+        cartItemsDiv.innerHTML = "";
+        cart.forEach((item, index) => {
+          subtotal += item.price * item.qty;
+          cartItemsDiv.innerHTML += `
+            <div style="margin-bottom: 15px; display: flex; gap: 10px;">
+                <img src="${item.image}" style="width: 50px; height: 60px; object-fit: cover;">
+                <div style="flex: 1;">
+                    <p style="font-weight: bold;">${item.name}</p>
+                    <div>
+                        <button onclick="updateQuantity(${index}, -1)">-</button>
+                        <span style="margin: 0 10px;">${item.qty}</span>
+                        <button onclick="updateQuantity(${index}, 1)">+</button>
+                    </div>
+                    <p>Rs. ${item.price * item.qty}</p>
+                </div>
+            </div>
+        `;
+        });
+
+        document.getElementById("subtotal").innerText = subtotal;
+        document.getElementById("total").innerText = subtotal + 120;
+      }
+
+      // Update quantity
+      function updateQuantity(index, change) {
+        let cart = getCart();
+        let newQty = cart[index].qty + change;
+
+        if (newQty < 1) {
+          cart.splice(index, 1);
+        } else if (newQty > cart[index].maxStock) {
+          alert(`Sorry! Only ${cart[index].maxStock} copies available.`);
+          return;
+        } else {
+          cart[index].qty = newQty;
+        }
+
+        saveCart(cart);
+        loadCart();
+      }
+
+      // Toggle cart
+      function toggleCart() {
+        document.getElementById("cartBox").classList.toggle("active");
+        document.getElementById("overlay").classList.toggle("active");
+        if (document.getElementById("cartBox").classList.contains("active")) {
+          loadCart();
+        }
+      }
+
+      // Go to checkout
+      function goToCheckout() {
+        let cart = getCart();
+        if (cart.length === 0) {
+          alert("Your cart is empty!");
+          return;
+        }
+        window.location.href = "checkout.php";
+      }
+
+      // Clear cart function
+      function clearCart() {
+        localStorage.removeItem("cart");
+        loadCart();
+      }
+
+      // Load cart on page load
+      loadCart()
+    </script>
+
+    <!-- FOOTER -->
+    <footer>
+      <p>© 2026 BookNest | All Rights Reserved</p>
+    </footer>
+  </body>
+</html>
