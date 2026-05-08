@@ -1,0 +1,839 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sana Malik | Portfolio</title>
+    <!-- Font Awesome for Icons - gives all the social media icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <style>
+        /* Reset default browser styles - removes all default margins and paddings */
+        * {
+            margin: 0;           /* Removes default outer spacing */
+            padding: 0;          /* Removes default inner spacing */
+            box-sizing: border-box;  /* Width includes padding and border, no unexpected overflow */
+        }
+
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;  /* Clean modern font */
+            line-height: 1.6;   /* Space between lines of text (1.6 = 60% more than normal) */
+            color: #333;        /* Dark gray text color (not pure black, easier on eyes) */
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9eef5 100%);  /* Smooth gradient background from light gray to lighter blue */
+        }
+
+        html {
+            scroll-behavior: smooth; /* When clicking anchor links, page scrolls slowly instead of jumping */
+        }
+
+        .container {
+            max-width: 1200px;   /* Maximum width of content, stops growing after 1200px */
+            margin: 0 auto;      /* Centers the container horizontally (auto = equal left/right margin) */
+            padding: 0 20px;     /* 20px padding on left/right, keeps content away from edges on mobile */
+        }
+
+        /* ========== HEADER / NAVBAR (Fixed at top) ========== */
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);  /* Blue gradient from dark to medium blue */
+            color: white;
+            padding: 1rem 0;      /* 1rem = 16px padding top and bottom */
+            position: fixed;      /* Stays at top even when scrolling */
+            width: 100%;          /* Takes full width of screen */
+            top: 0;               /* Attaches to very top of page */
+            z-index: 1000;        /* Stays above other elements (higher number = on top) */
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);  /* Subtle shadow below navbar */
+        }
+
+        nav {
+            display: flex;           /* Makes children align in a row */
+            justify-content: space-between;  /* Pushes logo to left, nav links to right */
+            align-items: center;     /* Vertically centers all items */
+        }
+
+        .logo {
+            font-size: 1.5rem;      /* 24px font size */
+            font-weight: bold;       /* Makes text thicker */
+            transition: transform 0.3s ease;  /* Smooth animation when transform property changes */
+        }
+
+        .logo:hover {
+            transform: scale(1.05);  /* Grows 5% bigger on hover */
+        }
+
+        .nav-links {
+            display: flex;           /* Makes list items appear in a row */
+            list-style: none;        /* Removes bullet points from list */
+            gap: 2rem;              /* Space between each nav link = 32px */
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;  /* Removes underline from links */
+            transition: all 0.3s ease;  /* Smooth transition for all property changes */
+            position: relative;       /* Needed for the underline animation pseudo-element */
+        }
+
+        /* Underline animation on hover - creates a yellow line below text */
+        .nav-links a::after {
+            content: "";              /* Empty content, but required for pseudo-element to show */
+            position: absolute;       /* Positions relative to parent (the <a> tag) */
+            bottom: -5px;            /* 5px below the text */
+            left: 0;                 /* Starts from left edge */
+            width: 0;                /* Starts with zero width (hidden) */
+            height: 2px;             /* 2 pixels thick line */
+            background: #ffd700;     /* Golden yellow color */
+            transition: width 0.3s ease;  /* Smoothly grows the width */
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;             /* Grows to full width on hover */
+        }
+
+        .nav-links a:hover {
+            color: #ffd700;          /* Changes text to golden yellow on hover */
+        }
+
+        /* ========== HERO SECTION (Home) ========== */
+        .hero {
+            padding: 150px 0 80px;   /* Top:150px, Bottom:80px (150px prevents hiding under fixed navbar) */
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);  /* Purple to violet gradient */
+            color: white;
+            text-align: center;       /* Centers all text inside */
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;         /* 48px font size */
+            margin-bottom: 1rem;      /* 16px space below heading */
+        }
+
+        .hero-content .highlight {
+            color: #ffd700;          /* Golden yellow color for highlighted text */
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;       /* 19.2px font size */
+            margin-bottom: 2rem;      /* 32px space below paragraph */
+        }
+
+        /* Button Styling */
+        .btn {
+            display: inline-block;     /* Behaves like block but sits in line with text */
+            padding: 12px 30px;       /* 12px top/bottom, 30px left/right */
+            background: #ffd700;      /* Golden yellow background */
+            color: #333;
+            text-decoration: none;
+            border-radius: 30px;      /* Fully rounded corners (pill shape) */
+            transition: all 0.3s ease;
+            margin: 0 10px;          /* 10px space on left and right of each button */
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);  /* Moves button up by 3px on hover */
+            background: #ffed4a;         /* Lighter yellow on hover */
+        }
+
+        .btn-outline {
+            background: transparent;      /* No background, see-through */
+            border: 2px solid #ffd700;   /* Yellow border */
+            color: #ffd700;              /* Yellow text */
+        }
+
+        .btn-outline:hover {
+            background: #ffd700;         /* Fills with yellow on hover */
+            color: #333;                 /* Dark text on hover */
+        }
+
+        /* ========== ALL SECTIONS COMMON ========== */
+        section {
+            padding: 80px 0;        /* 80px top and bottom padding for all sections */
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;      /* 40px font size */
+            margin-bottom: 50px;     /* 50px space below title */
+            color: #1e3c72;          /* Dark blue color */
+            position: relative;      /* Needed for the ::after underline */
+        }
+
+        /* Underline below section title - creates a blue line under each section heading */
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;           /* 10px below the text */
+            left: 50%;               /* Starts from center */
+            transform: translateX(-50%);  /* Shifts left by half its width to truly center */
+            width: 60px;             /* 60px wide line */
+            height: 3px;             /* 3px thick */
+            background: linear-gradient(135deg, #1e3c72, #2a5298);  /* Blue gradient */
+        }
+
+        /* ========== ABOUT SECTION ========== */
+        .about-content {
+            display: grid;                   /* Turns container into CSS Grid */
+            grid-template-columns: 1fr 1fr;  /* Creates 2 equal columns (1fr = 1 fraction of available space) */
+            gap: 40px;                      /* 40px gap between the two columns */
+            align-items: center;             /* Vertically centers items in each column */
+        }
+
+        .about-text p {
+            margin-bottom: 20px;     /* 20px space below each paragraph */
+            font-size: 1.1rem;      /* 17.6px font size */
+        }
+
+        .about-info {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;     /* Rounded corners */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);  /* Shadow: horizontal, vertical, blur, color */
+            transition: transform 0.3s ease;
+        }
+
+        .about-info:hover {
+            transform: translateY(-10px);  /* Lifts card up by 10px on hover */
+        }
+
+        .info-item {
+            margin: 10px 0;          /* 10px top and bottom margin */
+        }
+
+        .info-item strong {
+            color: #2a5298;          /* Blue color for bold text */
+        }
+
+        /* ========== SERVICES SECTION ========== */
+        .services-grid {
+            display: grid;           /* CSS Grid layout */
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));  
+            /* auto-fit = creates as many columns as can fit */
+            /* minmax(250px, 1fr) = each column at least 250px, can grow equally */
+            gap: 30px;              /* 30px gap between cards */
+        }
+
+        .service-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);  /* Lifts card up on hover */
+        }
+
+        .service-icon {
+            font-size: 3rem;        /* 48px icon size */
+            margin-bottom: 15px;
+            display: inline-block;   /* Makes it respect margin and padding */
+        }
+
+        .service-card h3 {
+            color: #1e3c72;
+            margin-bottom: 10px;
+        }
+
+        /* ========== SKILLS SECTION (Card Style with Icons) ========== */
+        .skills-grid-modern {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));  /* Responsive columns, min 160px each */
+            gap: 24px;              /* 24px gap between skill cards */
+        }
+
+        .skill-card-modern {
+            background: white;
+            padding: 24px 16px;     /* 24px top/bottom, 16px left/right */
+            border-radius: 16px;    /* 16px rounded corners */
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);  /* Light shadow */
+            border: 1px solid rgba(102, 126, 234, 0.1);   /* Very light blue border */
+        }
+
+        .skill-card-modern:hover {
+            transform: translateY(-6px);  /* Lifts card up by 6px */
+            box-shadow: 0 16px 28px rgba(102, 126, 234, 0.15);  /* Stronger shadow on hover */
+        }
+
+        .skill-icon-modern {
+            font-size: 2.8rem;      /* 44.8px icon size */
+            margin-bottom: 12px;
+        }
+
+        .skill-name-modern {
+            font-size: 1rem;        /* 16px font */
+            font-weight: 600;       /* Semi-bold */
+            color: #1e3c72;
+            margin-bottom: 6px;
+        }
+
+        .skill-cat-modern {
+            font-size: 0.7rem;      /* 11.2px small font */
+            color: #667eea;
+            background: #f0f4ff;    /* Light blue background */
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 20px;    /* Pill shape */
+        }
+
+        /* Individual skill icon colors - each skill gets a different brand color */
+        .skill-card-modern:nth-child(1) .skill-icon-modern { color: #00599c; }  /* C++ blue */
+        .skill-card-modern:nth-child(2) .skill-icon-modern { color: #007396; }  /* Java blue */
+        .skill-card-modern:nth-child(3) .skill-icon-modern { color: #f7df1e; }  /* JS yellow */
+        .skill-card-modern:nth-child(4) .skill-icon-modern { color: #777bb4; }  /* PHP purple */
+        .skill-card-modern:nth-child(5) .skill-icon-modern { color: #e34f26; }  /* HTML orange */
+        .skill-card-modern:nth-child(6) .skill-icon-modern { color: #1572b6; }  /* CSS blue */
+        .skill-card-modern:nth-child(7) .skill-icon-modern { color: #7952b3; }  /* Bootstrap purple */
+        .skill-card-modern:nth-child(8) .skill-icon-modern { color: #4479a1; }  /* MySQL blue */
+        .skill-card-modern:nth-child(9) .skill-icon-modern { color: #6c5ce7; }  /* Data Structures purple */
+        .skill-card-modern:nth-child(10) .skill-icon-modern { color: #00b4d8; } /* OOP cyan */
+        .skill-card-modern:nth-child(11) .skill-icon-modern { color: #f59e0b; } /* Web Dev orange */
+        .skill-card-modern:nth-child(12) .skill-icon-modern { color: #10b981; } /* Problem Solving green */
+        .skill-card-modern:nth-child(13) .skill-icon-modern { color: #f24e1e; } /* Figma orange */
+        .skill-card-modern:nth-child(14) .skill-icon-modern { color: #007acc; } /* VS Code blue */
+        .skill-card-modern:nth-child(15) .skill-icon-modern { color: #f05032; } /* Git orange */
+        .skill-card-modern:nth-child(16) .skill-icon-modern { color: #fb7a24; } /* XAMPP orange */
+
+        /* ========== EDUCATION SECTION ========== */
+        .edu-cert-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;  /* Two equal columns */
+            gap: 30px;                      /* 30px gap between columns */
+        }
+
+        .education-list,
+        .cert-list {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .education-list:hover,
+        .cert-list:hover {
+            transform: translateY(-5px);     /* Lifts up by 5px on hover */
+        }
+
+        .edu-item,
+        .cert-item {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;   /* Light gray separator line */
+        }
+
+        .edu-item h4,
+        .cert-item h4 {
+            color: #1e3c72;
+            margin-bottom: 5px;
+        }
+
+        .date {
+            color: #667eea;
+            font-size: 0.9rem;      /* 14.4px */
+            font-weight: bold;
+        }
+
+        .cgpa {
+            background: #ffd700;      /* Yellow background */
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;       /* 12.8px */
+            margin-top: 5px;
+        }
+
+        /* ========== PROJECTS SECTION ========== */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));  /* Responsive columns, at least 320px each */
+            gap: 30px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;        /* Hides anything that goes outside the rounded corners */
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);  /* Lifts up by 10px */
+        }
+
+        .project-img {
+            height: 180px;
+            background: linear-gradient(135deg, #667eea, #764ba2);  /* Purple gradient */
+            display: flex;
+            align-items: center;      /* Centers icon vertically */
+            justify-content: center;  /* Centers icon horizontally */
+            font-size: 4rem;         /* 64px icon */
+        }
+
+        .project-info {
+            padding: 20px;
+        }
+
+        .project-info h3 {
+            color: #1e3c72;
+            margin-bottom: 10px;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;         /* Allows tags to move to next line if not enough space */
+            gap: 8px;               /* 8px gap between tags */
+            margin: 15px 0;
+        }
+
+        .project-tech span {
+            background: #e9eef5;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.85rem;     /* 13.6px */
+        }
+
+        /* ========== CONTACT SECTION ========== */
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;  /* Two equal columns */
+            gap: 40px;
+        }
+
+        .contact-form,
+        .contact-info {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-form:hover,
+        .contact-info:hover {
+            transform: translateY(-5px);  /* Lifts up on hover */
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;              /* Takes full width of parent */
+            padding: 12px;
+            border: 1px solid #ddd;   /* Light gray border */
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 10px;
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;       /* 24px */
+            margin-right: 15px;
+            color: #667eea;
+        }
+
+        /* Social Media Icons */
+        .social-links {
+            display: flex;
+            gap: 20px;               /* 20px space between social icons */
+            margin-top: 30px;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            background: rgb(228, 232, 240);
+            transition: all 0.4s ease;
+        }
+
+        .social-link img {
+            width: 24px;
+            height: 24px;
+        }
+
+        .social-link:hover {
+            transform: translateY(-5px) scale(1.1);  /* Moves up and grows 10% on hover */
+        }
+
+        /* Social Media Hover Colors - Instagram, GitHub, LinkedIn specific colors */
+        .social-link:nth-child(1):hover { background: linear-gradient(135deg, #f58529, #dd2a7b); }  /* Instagram gradient */
+        .social-link:nth-child(2):hover { background: #181717; }  /* GitHub black */
+        .social-link:nth-child(3):hover { background: #0077b5; }  /* LinkedIn blue */
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        button {
+            background: #ffd700;
+            color: #333;
+            border: none;
+            cursor: pointer;          /* Changes mouse to hand icon */
+            font-weight: bold;
+            padding: 12px 30px;
+            border-radius: 30px;
+        }
+
+        button:hover {
+            background: #ffed4a;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- ========== HEADER / NAVIGATION BAR ========== -->
+    <!-- Fixed navbar that stays at top when scrolling -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Sana Malik</div>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#home">Home</a></li>      <!-- #home links to section with id="home" -->
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#education">Education</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ========== HOME / HERO SECTION ========== -->
+    <!-- First section users see - has name, title, and call-to-action buttons -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Hi, I'm <span class="highlight">Sana Malik</span></h1>
+                <p>Full Stack Developer | 4th Semester CS Student</p>
+                <div>
+                    <a href="#contact" class="btn">Hire Me</a>                  <!-- Scroll to contact section -->
+                    <a href="#projects" class="btn btn-outline">View Projects</a>  <!-- Scroll to projects -->
+                    <a href="SanaMalik_CV.pdf" target="_blank" class="btn btn-outline">📄 View CV</a>  <!-- Opens CV PDF in new tab -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== ABOUT ME SECTION ========== -->
+    <!-- Personal introduction and quick info cards -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>
+                        I'm a passionate Full Stack Developer and 4th semester Computer
+                        Science student at Riphah International University, Islamabad.
+                        With a strong foundation in programming and web development, I
+                        love creating elegant solutions to complex problems.
+                    </p>
+                    <p>
+                        My journey in tech started with C++ and Data Structures, and I've
+                        since expanded into web technologies like HTML, CSS, JavaScript,
+                        PHP, and Bootstrap. I'm also skilled in UI/UX design using Figma.
+                    </p>
+                    <p>
+                        I believe in writing clean, maintainable code and continuously
+                        learning new technologies.
+                    </p>
+                </div>
+                <div class="about-info">
+                    <h3>Quick Info</h3>
+                    <div class="info-item"><strong>🎓 Student:</strong> BS CS (4th Semester)</div>
+                    <div class="info-item"><strong>📍 Location:</strong> Rawalpindi, Pakistan</div>
+                    <div class="info-item"><strong>📧 Email:</strong> sana.malik.tech@gmail.com</div>
+                    <div class="info-item"><strong>📱 Phone:</strong> +92 312 9200279</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== SERVICES SECTION ========== -->
+    <!-- Services/offerings section with 4 cards -->
+    <section id="services" style="background: #f0f4f8">
+        <div class="container">
+            <h2 class="section-title">My Quality Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">💻</div>
+                    <h3>Web Development</h3>
+                    <p>Responsive websites using HTML, CSS, JS, PHP, Bootstrap</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🎨</div>
+                    <h3>UI/UX Design</h3>
+                    <p>Beautiful designs in Figma with focus on user experience</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📱</div>
+                    <h3>Full Stack Solutions</h3>
+                    <p>End-to-end web apps with database integration</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">⚡</div>
+                    <h3>Performance Optimization</h3>
+                    <p>Speed optimization for better user experience</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== SKILLS SECTION (Cards with Icons) ========== -->
+    <!-- Displays technical skills in modern card format with brand-colored icons -->
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title">Skills I Have</h2>
+            <div class="skills-grid-modern">
+                <!-- Programming Languages -->
+                <div class="skill-card-modern">
+                    <div class="skill-icon-modern"><i class="fab fa-cuttlefish"></i></div>
+                    <div class="skill-name-modern">C++</div>
+                    <div class="skill-cat-modern">Programming Language</div>
+                </div>
+                <div class="skill-card-modern">
+                    <div class="skill-icon-modern"><i class="fab fa-java"></i></div>
+                    <div class="skill-name-modern">Java (OOP)</div>
+                    <div class="skill-cat-modern">Programming Language</div>
+                </div>
+                <div class="skill-card-modern">
+                    <div class="skill-icon-modern"><i class="fab fa-js"></i></div>
+                    <div class="skill-name-modern">JavaScript</div>
+                    <div class="skill-cat-modern">Frontend</div>
+                </div>
+                <div class="skill-card-modern">
+                    <div class="skill-icon-modern"><i class="fab fa-php"></i></div>
+                    <div class="skill-name-modern">PHP</div>
+                    <div class="skill-cat-modern">Backend</div>
+                </div>
+                <div class="skill-card-modern">
+                    <div class="skill-icon-modern"><i class="fab fa-html5"></i></div>
+                    <div class="skill-name-modern">HTML5</div>
+                    <div class="skill-cat-modern">Frontend</div>
+                </div>
+                <div class="skill-card-modern">
+                    <div class="skill-icon-modern"><i class="fab fa-css3-alt"></i></div>
+                    <div class="skill-name-modern">CSS3</div>
+                    <div class="skill-cat-modern">Frontend</div>
+                </div>
+                <div class="skill-card-modern">
+                    <div class="skill-icon-modern"><i class="fab fa-bootstrap"></i></div>
+                    <div class="skill-name-modern">Bootstrap</div>
+                    <div class="skill-cat-modern">Styling & UI</div>
+                </div>
+                <div class="skill-card-modern">
+                    <div class="skill-icon-modern"><i class="fas fa-database"></i></div>
+                    <div class="skill-name-modern">MySQL</div>
+                    <div class="skill-cat-modern">Database</div>
+                </div>
+                <div class="skill-card-modern">
+                    <div class="skill-icon-modern"><i class="fas fa-project-diagram"></i></div>
+                    <div class="skill-name-modern">Data Structures</div>
+                    <div class="skill-cat-modern">Core CS</div>
+                </div>
+                <div class="skill-card-modern">
+                    <div class="skill-icon-modern"><i class="fas fa-object-group"></i></div>
+                    <div class="skill-name-modern">OOP</div>
+                    <div class="skill-cat-modern">Core CS</div>
+                </div>
+                <div class="skill-card-modern">
+                    <div class="skill-icon-modern"><i class="fas fa-chalkboard-user"></i></div>
+                    <div class="skill-name-modern">Web Development</div>
+                    <div class="skill-cat-modern">Core CS</div>
+                </div>
+                <div class="skill-card-modern">
+                    <div class="skill-icon-modern"><i class="fas fa-brain"></i></div>
+                    <div class="skill-name-modern">Problem Solving</div>
+                    <div class="skill-cat-modern">Core CS</div>
+                </div>
+                <div class="skill-card-modern">
+                    <div class="skill-icon-modern"><i class="fab fa-figma"></i></div>
+                    <div class="skill-name-modern">Figma</div>
+                    <div class="skill-cat-modern">Design Tool</div>
+                </div>
+                <div class="skill-card-modern">
+                    <div class="skill-icon-modern"><i class="fas fa-code"></i></div>
+                    <div class="skill-name-modern">VS Code</div>
+                    <div class="skill-cat-modern">IDE</div>
+                </div>
+                <div class="skill-card-modern">
+                    <div class="skill-icon-modern"><i class="fab fa-git-alt"></i></div>
+                    <div class="skill-name-modern">Git</div>
+                    <div class="skill-cat-modern">Version Control</div>
+                </div>
+                <div class="skill-card-modern">
+                    <div class="skill-icon-modern"><i class="fas fa-server"></i></div>
+                    <div class="skill-name-modern">XAMPP</div>
+                    <div class="skill-cat-modern">Local Server</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== EDUCATION & CERTIFICATIONS SECTION ========== -->
+    <!-- Shows academic background and earned certificates -->
+    <section id="education" style="background: #f0f4f8">
+        <div class="container">
+            <h2 class="section-title">Education & Certifications</h2>
+            <div class="edu-cert-grid">
+                <div class="education-list">
+                    <h3>🎓 Education</h3>
+                    <div class="edu-item">
+                        <h4>BS Computer Science</h4>
+                        <p class="date">2024 - Present | 4th Semester</p>
+                        <p>Riphah University, Islamabad</p>
+                        <span class="cgpa">CGPA: 3.93/4.00</span>
+                    </div>
+                    <div class="edu-item">
+                        <h4>Intermediate (Pre-Engineering)</h4>
+                        <p class="date">2022 - 2024</p>
+                        <p>Bahria College Karsaz, Karachi</p>
+                    </div>
+                    <div class="edu-item">
+                        <h4>Matriculation (Science)</h4>
+                        <p class="date">2021 - 2022</p>
+                        <p>Green Flag School, Karachi</p>
+                    </div>
+                </div>
+                <div class="cert-list">
+                    <h3>📜 Certifications</h3>
+                    <div class="cert-item">
+                        <h4>Web Development Bootcamp</h4>
+                        <p class="date">2024</p>
+                        <p>HTML, CSS, JS, PHP</p>
+                    </div>
+                    <div class="cert-item">
+                        <h4>Data Structures & Algorithms</h4>
+                        <p class="date">2024</p>
+                        <p>C++ Programming</p>
+                    </div>
+                    <div class="cert-item">
+                        <h4>UI/UX Design with Figma</h4>
+                        <p class="date">2023</p>
+                        <p>Modern design principles</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== PROJECTS SECTION ========== -->
+    <!-- Showcases portfolio projects with technology tags -->
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title">My Recent Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-img">🛒</div>
+                    <div class="project-info">
+                        <h3>Supermart Management System</h3>
+                        <p>Java GUI-based system using OOP concepts in NetBeans. Manages inventory, billing, and customer records.</p>
+                        <div class="project-tech">
+                            <span>Java</span><span>OOP</span><span>NetBeans</span><span>JFrame GUI</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-img">📚</div>
+                    <div class="project-info">
+                        <h3>Online Book Store</h3>
+                        <p>Responsive website with PHP & MySQL backend. Users can browse and manage books.</p>
+                        <div class="project-tech">
+                            <span>HTML/CSS</span><span>JavaScript</span><span>PHP</span><span>MySQL</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-img">💼</div>
+                    <div class="project-info">
+                        <h3>Portfolio Website</h3>
+                        <p>Modern responsive portfolio with smooth animations and hover effects.</p>
+                        <div class="project-tech">
+                            <span>HTML5</span><span>CSS3</span><span>Flexbox</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== CONTACT SECTION ========== -->
+    <!-- Contact form and social media links -->
+    <section id="contact" style="background: #f0f4f8">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-content">
+                <div class="contact-form">
+                    <h3>Send me a message</h3>
+                    <form>
+                        <div class="form-group">
+                            <input type="text" placeholder="Your Name" required />
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="Your Email" required />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" placeholder="Subject" />
+                        </div>
+                        <div class="form-group">
+                            <textarea rows="5" placeholder="Your Message" required></textarea>
+                        </div>
+                        <button type="submit">Send Message</button>
+                    </form>
+                </div>
+                <div class="contact-info">
+                    <h3>Contact Info</h3>
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div>Rawalpindi, Pakistan</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📧</div>
+                        <div>sana.malik.tech@gmail.com</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📱</div>
+                        <div>+92 312 9200279</div>
+                    </div>
+                    <div class="social-links">
+                        <!-- Instagram link opens in new tab -->
+                        <a href="https://www.instagram.com/heyits_sanaaa/" target="_blank" class="social-link"><img src="image/instagram.png" alt="Instagram" /></a>
+                        <!-- GitHub link opens in new tab -->
+                        <a href="https://github.com/Ssana-Malik" target="_blank" class="social-link"><img src="image/github.png" alt="GitHub" /></a>
+                        <!-- LinkedIn link opens in new tab -->
+                        <a href="https://pk.linkedin.com/" target="_blank" class="social-link"><img src="image/linkedin.png" alt="LinkedIn" /></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <!-- Copyright footer at bottom of page -->
+    <footer>
+        <div class="container">
+            <p>© 2026 Sana Malik - All Rights Reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
