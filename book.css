@@ -1,0 +1,335 @@
+/* Makes body a flex container so footer sticks to bottom even if content is short */
+body {
+  display: flex;
+  flex-direction: column;  /* Stacks elements vertically (header → main → footer) */
+  min-height: 100vh;  /* Minimum height = full viewport height */
+}
+
+/* RESET STYLES - removes all default browser styles */
+* {
+  margin: 0;  /* Removes default outer spacing */
+  padding: 0;  /* Removes default inner spacing */
+  box-sizing: border-box;  /* Width includes padding and border - prevents overflow */
+  font-family: Arial, sans-serif;  /* Default font for everything */
+}
+
+/* ========== NAVBAR STYLES ========== */
+.navbar {
+  display: flex;  /* Makes children align in a row */
+  justify-content: space-between;  /* Logo on left, links in middle? Actually pushes items apart */
+  align-items: center;  /* Vertically centers all navbar items */
+  padding: 15px 50px;  /* 15px top/bottom, 50px left/right */
+  background: #2c3e50;  /* Dark blue-gray background */
+  color: white;
+}
+
+.logo {
+  display: flex;  /* Aligns logo image and text in a row */
+  align-items: center;  /* Vertically centers them */
+  gap: 10px;  /* 10px space between image and text */
+}
+
+.logo img {
+  width: 40px;  /* Logo image width */
+  height: 40px;  /* Logo image height */
+}
+
+.logo span {
+  font-size: 22px;  /* Website name font size */
+  font-weight: bold;  /* Makes text thicker */
+}
+
+.nav-links {
+  display: flex;  /* Makes list items appear in a row */
+  list-style: none;  /* Removes bullet points from list */
+}
+
+.nav-links li {
+  margin: 0 15px;  /* 15px space on left and right of each list item */
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;  /* Removes underline from links */
+  transition: 0.3s;  /* Smooth color change on hover (0.3 seconds) */
+}
+
+.nav-links a:hover {
+  color: orange;  /* Changes link color to orange when mouse hovers */
+}
+
+.nav-links a.active {
+    color: orange !important;  /* Highlights current page in orange, !important overrides other styles */
+    font-weight: bold;  /* Makes active link thicker */
+}
+
+/* ========== ICON STYLES ========== */
+.nav-icons {
+  display: flex;  /* Aligns icons in a row */
+  align-items: center;
+}
+
+.cart-icon {
+  width: 25px;  /* Cart icon width */
+  height: 25px;  /* Cart icon height */
+  cursor: pointer;  /* Changes mouse cursor to hand when hovering over cart */
+}
+
+/* ========== MAIN CONTENT CONTAINER ========== */
+.container {
+  padding: 40px 70px;  /* 40px top/bottom, 70px left/right */
+}
+
+/* Title styling */
+.title {
+  font-size: 36px;  /* Large heading size */
+  font-weight: 700;  /* Bold (700 = bold) */
+  color: #1a2b4c;  /* Dark blue color */
+  margin-bottom: 10px;  /* Space below title */
+}
+
+/* Subtitle styling */
+.subtitle {
+  color: #6c7a92;  /* Grayish blue */
+  font-size: 16px;
+  margin-bottom: 30px;  /* Space below subtitle */
+}
+
+/* ========== CATEGORY BUTTONS ========== */
+.categories {
+    display: flex;  /* Buttons in a row */
+    flex-wrap: wrap;  /* If screen too small, buttons move to next line */
+    gap: 12px;  /* 12px space between buttons */
+}
+
+.categories button {
+    padding: 10px 18px;  /* 10px top/bottom, 18px left/right */
+    border-radius: 25px;  /* Rounded corners (pill shape) */
+    border: 1px solid #d0d7e2;  /* Light gray border */
+    background-color: #fff;  /* White background */
+    color: #1a2b4c;
+    cursor: pointer;  /* Hand cursor on hover */
+    font-size: 14px;
+    transition: 0.3s;  /* Smooth background change */
+}
+
+.categories button:hover {
+    background-color: #e6ecf5;  /* Light blue-gray on hover */
+}
+
+.categories button.active {
+    background-color: #0d2b4d;  /* Dark blue for active button */
+    color: #fff;  /* White text */
+    border: none;  /* Remove border */
+}
+
+.categories button:active {
+    transform: scale(0.95);  /* Slightly shrinks button when clicked (pressed effect) */
+}
+
+/* ========== MESSAGE ALERTS (Success/Error) ========== */
+.message {
+    padding: 10px;
+    margin: 20px auto;  /* Centers horizontally */
+    border-radius: 5px;  /* Slightly rounded corners */
+    text-align: center;
+    max-width: 500px;  /* Won't get wider than 500px */
+}
+
+.message.error {
+    background: #f8d7da;  /* Light red background for errors */
+    color: #721c24;  /* Dark red text */
+    border: 1px solid #f5c6cb;  /* Red border */
+}
+
+.message.success {
+    background: #d4edda;  /* Light green background for success */
+    color: #155724;  /* Dark green text */
+    border: 1px solid #c3e6cb;  /* Green border */
+}
+
+/* ========== BOOKS GRID (Product Display) ========== */
+.books {
+  display: grid;  /* Uses CSS Grid layout */
+  grid-template-columns: repeat(auto-fit, minmax(230px, 250px));  /* Creates responsive columns: each at least 230px, max 250px, auto wraps */
+  gap: 45px;  /* 45px gap between cards (both row and column) */
+  margin-top: 30px;
+  justify-content: center;  /* Centers the grid horizontally */
+}
+
+/* Individual Book Card */
+.card {
+  background: #fff;
+  border-radius: 12px;  /* Rounded corners */
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);  /* Shadow: horizontal, vertical, blur, color (light black with 8% opacity) */
+  transition: 0.3s;  /* Smooth transform on hover */
+  max-width: 250px;
+  margin: auto;  /* Centers card within grid cell */
+}
+
+.card:hover {
+  transform: translateY(-5px);  /* Card lifts up 5px when mouse hovers */
+}
+
+/* Book Cover Image */
+.card img {
+  width: 100%;  /* Takes full width of card */
+  aspect-ratio: 230 / 285;  /* Maintains specific width-to-height ratio (230:285) */
+  object-fit: cover;  /* Covers area without stretching, may crop edges */
+  border-radius: 8px;  /* Rounded corners for image */
+}
+
+/* Book Title */
+.card h3 {
+  font-size: 18px;
+  margin: 12px 0 5px;  /* 12px top, 0 left/right, 5px bottom */
+  color: #1a2b4c;
+}
+
+/* Author styling */
+.author {
+  color: gray;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+/* Price styling */
+.price {
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+/* Add to Cart Button */
+.add-btn {
+  width: 100%;  /* Full width of card */
+  padding: 10px;
+  background-color: #0d2b4d;  /* Dark blue */
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.card button:hover {
+  background-color: #163d6b;  /* Slightly lighter blue on hover */
+}
+
+/* ========== BOOK DETAIL PAGE STYLES ========== */
+/* Back button container */
+.back {
+  padding: 20px 70px;  /* 20px top/bottom, 70px left/right */
+}
+
+.back a {
+  text-decoration: none;  /* Removes underline */
+  color: #1a2b4c;
+  font-weight: 500;  /* Medium bold */
+}
+
+/* Book detail section */
+.book-detail {
+  padding: 40px 20px;
+}
+
+/* Detail card - two column layout */
+.detail-card {
+  display: flex;  /* Image and info side by side */
+  gap: 40px;  /* 40px space between image and info */
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  max-width: 1000px;  /* Maximum width of detail card */
+  margin: auto;  /* Centers horizontally */
+}
+
+/* Detail page image */
+.detail-img img {
+  width: 260px;  /* Fixed width for detail page image */
+  border-radius: 10px;
+}
+
+/* Detail info container */
+.detail-info {
+  max-width: 500px;  /* Prevents info section from getting too wide */
+}
+
+.detail-info h1 {
+  color: #1a2b4c;
+  margin-bottom: 10px;
+}
+
+/* Rating stars styling */
+.rating {
+  color: orange;
+  margin-bottom: 10px;
+}
+
+/* Book description */
+.desc {
+  margin: 15px 0;
+  color: #444;
+  line-height: 1.6;  /* Increases space between lines for readability */
+}
+
+/* Quantity selector buttons */
+.quantity {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.quantity button {
+  padding: 5px 12px;
+  border: none;
+  background: #e6ecf5;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+/* ========== FOOTER ========== */
+footer {
+  background: #111;  /* Almost black background */
+  color: white;
+  text-align: center;
+  padding: 15px;
+  margin-top: auto;  /* Pushes footer to bottom using flexbox */
+}
+
+/* Quantity selector for book detail page (additional styles) */
+.quantity {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.quantity button {
+    width: 35px;
+    height: 35px;
+    border: 1px solid #ddd;
+    background: #f5f5f5;
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 5px;
+}
+
+.quantity button:hover {
+    background: #e0e0e0;  /* Darker on hover */
+}
+
+.quantity span {
+    font-size: 18px;
+    font-weight: bold;
+    min-width: 30px;  /* Minimum width to prevent jumping */
+    text-align: center;
+}
+
+/* Stock warning message for when user tries to order more than available */
+.stock-warning {
+    color: #ff6b6b;  /* Red color */
+    font-size: 14px;
+    margin-top: 10px;
+}
