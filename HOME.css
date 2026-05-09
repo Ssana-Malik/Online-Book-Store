@@ -1,0 +1,147 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* NAVBAR */
+.navbar {
+    display: flex;
+    justify-content: space-between;   /* horizontal alignment*/
+    align-items: center;  /* vertical alignment*/
+    padding: 15px 50px;
+    background: #2c3e50;
+    color: white;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;        /* Adds 10px space between text and cart logo */
+}
+
+.logo img {
+    width: 40px;
+    height: 40px;
+}
+
+.logo span {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;   /* removes the list to appear in bullet form */
+}
+
+.nav-links li {
+    margin: 0 15px;   /* add the 0px spacing top-bottom, and 15px spacing left-right*/
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    transition: 0.3s;  /* Color will change smoothly in 0.3 seconds not instantly*/
+}
+
+.nav-links a:hover {
+    color: orange;
+}
+
+.nav-links a.active {
+    color: orange !important;
+    font-weight: bold;
+}
+
+/* ICONS */
+.nav-icons {
+    display: flex;
+    align-items: center;
+}
+
+.cart-icon {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}
+
+
+/* Mid_Section */
+.mid_section{
+    position: relative;  /* element stays in its normal position but can be adjusted */
+    height: 80vh;
+    background: url('image/background.png') no-repeat center/cover;
+}
+
+.overlay {
+    position: absolute;   /* is removed from the normal flow of the page and positioned freely inside its parent container. */
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);   /* creates a transparent dark layer on top of background image */
+}
+
+.mid_section-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);   /* used to perfectly center an element both horizontally and vertically. */
+    text-align: center;
+    color: white;
+}
+
+.shop-btn {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background: orange;
+    border: none;
+    cursor: pointer;
+}
+
+
+/* SECTIONS */
+.section {
+    padding: 50px;
+    text-align: center;
+}
+
+.section h2 {
+    margin-bottom: 30px;
+}
+
+.books {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    width: 100%;
+    padding: 0 20px; /* This ensures consistent spacing */
+}
+
+/* Add this to make books same size */
+.book {
+    width: 200px;
+}
+
+.book img {
+    width: 200px;
+    height: 300px;
+}
+
+.book p {
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+.book span {
+    color: green;
+}
+
+
+/* FOOTER */
+footer {
+    background: #111;
+    color: white;
+    text-align: center;
+    padding: 15px;
+}
