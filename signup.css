@@ -1,0 +1,111 @@
+* {
+    margin: 0;    /* Space outside the element (between element and others) */
+    padding: 0;   /* Space inside the element (between content and border) */
+    box-sizing: border-box;  /*size stays fixed, the width and height you define in CSS will remain fixed. */
+    font-family: Arial, sans-serif;
+}
+
+/* OUTER CONTAINER */
+.outer-container {
+    height: 100vh;
+    width: 100%;
+    background: #2c3e50;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* INNER CONTAINER */
+.inner-container {
+    width: 80%;
+    height: 80%;
+    background: white;
+    display: flex;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.50);
+}
+
+/* LEFT SIDE */
+.left {
+    width: 50%;
+    display: flex;
+    justify-content: center;   /* horizontal alignment*/
+    align-items: center;       /* vertical alignment*/
+}
+
+.left img {
+    width: 90%;
+    height: 90%;
+    object-fit: cover;   /*use to make image or video fill its container completely*/
+    border-radius: 15px;
+}
+
+/* RIGHT SIDE */
+.right {
+    width: 50%;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.right h1 {
+    margin-bottom: 10px;   /*Adds 10px space below the heading */
+} 
+
+.right p {
+    margin-bottom: 20px;  /*Adds 10px space below the paragraph */
+    color: gray;
+}
+
+/* INPUT FIELDS */
+.right input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;    /* add the 10px spacing above and below the fields, No(0px) left-right spacing */
+    border: none;
+    border-radius: 8px;
+    background: #f0f4ff;
+    outline: none;   /* default outline (blue/black border) that appears when you click or focus on an input field. */
+}
+
+/* BUTTON */
+.right button {
+    width: 100%;
+    padding: 12px;
+    background: #2c3e50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.right button:hover {
+    background: #5a67d8;
+}
+
+/* LOGIN TEXT */
+.login-text {
+    margin-top: 10px;
+    font-size: 14px;
+    color: gray;
+}
+
+.login-text a {
+    color: black;
+    text-decoration: none;   /* removes the underline from link */
+    font-weight: bold;
+}
+
+.login-text a:hover {
+    text-decoration: underline;
+}
+
+/* HOME LINK */
+.home {
+    margin-top: 15px;
+    text-decoration: none;
+    color: black;
+}
+
