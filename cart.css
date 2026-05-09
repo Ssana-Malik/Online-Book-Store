@@ -1,0 +1,107 @@
+/* Manahil */
+/* OVERLAY */
+#overlay{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 998;
+}
+
+/* SIDEBAR CART (professional) */
+#cartBox{
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 350px;
+    height: 100vh;
+    background: #fff;
+    padding: 20px;
+    box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+    transition: 0.3s ease;
+    z-index: 999;
+    overflow-y: auto;
+}
+
+/* OPEN STATE */
+#cartBox.active{
+    right: 0;
+}
+
+#overlay.active{
+    display: block;
+}
+/* CART ITEM DESIGN */
+.cart-item{
+    display: flex;
+    gap: 12px;
+    padding: 10px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #eee;
+    align-items: center;
+}
+
+.cart-item img{
+    width: 60px;
+    height: 75px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.cart-info{
+    flex: 1;
+}
+
+.cart-info p{
+    margin: 2px 0;
+    font-size: 14px;
+}
+
+.cart-name{
+    font-weight: 600;
+    color: #1a2b4c;
+}
+
+.cart-price{
+    color: #555;
+}
+
+/* QTY BUTTONS */
+.qty-box{
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 5px;
+}
+
+.qty-box button{
+    width: 25px;
+    height: 25px;
+    border: none;
+    background: #e6ecf5;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.qty-box span{
+    min-width: 20px;
+    text-align: center;
+}
+
+/* EMPTY MESSAGE */
+.empty-cart{
+    text-align: center;
+    color: gray;
+    margin-top: 30px;
+}
+
+/* TOTAL SECTION */
+.total{
+    font-weight: bold;
+    margin-top: 5px;
+}
