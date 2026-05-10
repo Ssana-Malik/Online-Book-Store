@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+
+<link rel="stylesheet" href="cart.css">
+<!-- Sets the favicon (website icon) that appears in browser tab -->
+ <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/29/29302.png" type="image/png">
+<!-- Links the main stylesheet for about and contact pages -->
+<link rel="stylesheet" href="aboutcontact.css">
+</head> 
+
+<body> <!-- Start of visible page content -->
+
+    <!-- NAVBAR -->
+    <!-- Navigation bar container: contains logo, links, and cart icon -->
+    <nav class="navbar">
+        
+        <!-- Logo area: displays image and website name -->
+        <div class="logo">
+            <img src="image/logo.png" alt="Logo"> <!-- Website logo image with alt text for accessibility -->
+            <span>BookNest</span> <!-- Website name text -->
+        </div>
+
+        <!-- Unordered list for navigation menu items -->
+        <ul class="nav-links">
+                <li><a href="home.html">Home</a></li> <!-- Link to homepage -->
+                <li><a href="book.php">Books</a></li> <!-- Link to books page (PHP backend) -->
+                <li><a href="about.html">About Us</a></li> <!-- Link to about page -->
+                <li><a href="contact.html" class="active">Contact Us</a></li> <!-- Current page link with 'active' class for highlighting -->
+                <li><a href="login.html">Login</a></li> <!-- Added login as link -->
+        </ul>
+
+        <!-- Container for icons in navbar -->
+        <div class="nav-icons">
+            <!-- Cart icon image; onclick calls JavaScript toggleCart() to show/hide cart sidebar -->
+            <img src="image/shopping-cart.png" class="cart-icon" alt="Cart" onclick="toggleCart()">
+        </div>
+
+    </nav> <!-- End of navbar -->
+
+    <!-- HERO -->
+    <!-- Hero section: large background image area with overlay -->
+    <div class="hero">
+        <!-- Dark overlay to improve text readability over background image -->
+        <div class="overlay">
+            <h1>Contact Us</h1> <!-- Main heading of the page -->
+            <p>We’d love to hear from you 💌</p> <!-- Subheading with heart emoji -->
+        </div>
+    </div>
+
+    <!-- MAIN -->
+    <!-- Main container for two-column layout (contact form and info) -->
+    <div class="container">
+
+        <!-- FORM -->
+        <!-- Left column: contact form section -->
+        <div class="form-section">
+            <h3>Send Message</h3> <!-- Section heading -->
+
+            <!-- Form that submits data to contact.php using POST method (hidden from URL) -->
+            <form action="contact.php" method="POST">
+                <!-- Text input for user's full name -->
+                <input type="text" name="name" placeholder="Your Name">
+                <!-- Email input for user's email address; browser may validate format -->
+                <input type="email" name="email" placeholder="Your Email">
+                <!-- Multi-line textarea for the user's message -->
+                <textarea name="message" placeholder="Your Message"></textarea>
+                <!-- Submit button with class 'btn' for styling -->
+                <button class="btn">Send</button>
+            </form>
+        </div>
+
+        <!-- INFO -->
+        <!-- Right column: contact information section -->
+        <div class="info-section">
+            <h3>Get in Touch</h3> <!-- Section heading -->
+            <!-- Address with location emoji (📍) -->
+            <p>📍 Rawalpindi, Pakistan</p>
+            <!-- Email with envelope emoji (📧) -->
+            <p>📧 support@booknest.com</p>
+            <!-- Phone number with telephone emoji (📞) -->
+            <p>📞 0300-1234567</p>
+
+            <!-- Horizontal rule with white border for visual separation -->
+            <hr style="border-color:white;">
+
+            <h4>Follow Us</h4> <!-- Subheading for social media links -->
+
+            <!-- Container for social media icon links -->
+            <div class="social">
+                <!-- Instagram link; opens in new tab (target="_blank") -->
+                <a href="https://www.instagram.com/" target="_blank">
+                    <!-- Instagram icon image from external CDN -->
+                    <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="instagram icon">
+                </a>
+
+                <!-- Twitter/X link -->
+                <a href="https://twitter.com/" target="_blank">
+                    <img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" alt="twitter icon">
+                </a>
+
+                <!-- WhatsApp direct chat link (using wa.me with phone number) -->
+                <a href="https://wa.me/923001234567" target="_blank">
+                    <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="whatsapp icon">
+                </a>
+            </div>
+        </div>
+
+    </div> <!-- End of main container -->
+
+    <!-- Cart Box -->
+    <div id="cartBox">
+    <h3>Your Cart</h3>
+    <div id="cartItems"></div>
+    <hr>
+    <div>Subtotal: Rs. <span id="subtotal">0</span></div>
+    <div>Shipping: Rs. 120</div>
+    <div style="font-weight: bold;">Total: Rs. <span id="total">0</span></div>
+    <button onclick="goToCheckout()"
+    style="margin-top: 10px; width: 100%; padding: 10px; background: #0d2b4d; color: white; border: none; cursor: pointer;">Checkout</button>
+    </div>
+    <div id="overlay" onclick="toggleCart()"></div>
+
+    <script>
+    // Get cart from localStorage
+    function getCart() {
+        let cart = localStorage.getItem('cart');
+        return cart ? JSON.parse(cart) : [];
+    }
+
+    // Save cart to localStorage
+    function saveCart(cart) {
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
+    // Add to cart function
+    function addToCart(name, price, image, stock) {
+        let cart = getCart();
+        let existingItem = cart.find(item => item.name === name);
+
+        if (existingItem) {
+        if (existingItem.qty + 1 > stock) {
+            alert(`Sorry! Only ${stock} copies available.`);
+            return;
+        }
+        existingItem.qty++;
+        } else {
+        if (1 > stock) {
+            alert(`Sorry! This book is out of stock.`);
+            return;
+        }
+        cart.push({
+            name: name,
+            price: price,
+            image: image,
+            qty: 1,
+            maxStock: stock
+        });
+        }
+
+        saveCart(cart);
+        alert(`${name} added to cart!`);
+        loadCart();
+    }
+
+    // Load cart display
+    function loadCart() {
+        let cart = getCart();
+        let cartItemsDiv = document.getElementById('cartItems');
+        let subtotal = 0;
+
+        if (cart.length === 0) {
+        cartItemsDiv.innerHTML = '<p>Your cart is empty</p>';
+        document.getElementById('subtotal').innerText = '0';
+        document.getElementById('total').innerText = '0';
+        return;
+        }
+
+        cartItemsDiv.innerHTML = '';
+        cart.forEach((item, index) => {
+        subtotal += item.price * item.qty;
+        cartItemsDiv.innerHTML += `
+                <div style="margin-bottom: 15px; display: flex; gap: 10px;">
+                    <img src="${item.image}" style="width: 50px; height: 60px; object-fit: cover;">
+                    <div style="flex: 1;">
+                        <p style="font-weight: bold;">${item.name}</p>
+                        <div>
+                            <button onclick="updateQuantity(${index}, -1)">-</button>
+                            <span style="margin: 0 10px;">${item.qty}</span>
+                            <button onclick="updateQuantity(${index}, 1)">+</button>
+                        </div>
+                        <p>Rs. ${item.price * item.qty}</p>
+                    </div>
+                </div>
+            `;
+        });
+
+        document.getElementById('subtotal').innerText = subtotal;
+        document.getElementById('total').innerText = subtotal + 120;
+    }
+
+    // Update quantity
+    function updateQuantity(index, change) {
+        let cart = getCart();
+        let newQty = cart[index].qty + change;
+
+        if (newQty < 1) {
+        cart.splice(index, 1);
+        } else if (newQty > cart[index].maxStock) {
+        alert(`Sorry! Only ${cart[index].maxStock} copies available.`);
+        return;
+        } else {
+        cart[index].qty = newQty;
+        }
+
+        saveCart(cart);
+        loadCart();
+    }
+
+    // Toggle cart
+    function toggleCart() {
+        document.getElementById('cartBox').classList.toggle('active');
+        document.getElementById('overlay').classList.toggle('active');
+        if (document.getElementById('cartBox').classList.contains('active')) {
+        loadCart();
+        }
+    }
+
+    // Go to checkout
+    function goToCheckout() {
+        let cart = getCart();
+        if (cart.length === 0) {
+        alert('Your cart is empty!');
+        return;
+        }
+        window.location.href = 'checkout.php';
+    }
+
+    // Clear cart function
+    function clearCart() {
+        localStorage.removeItem('cart');
+        loadCart();
+    }
+
+    // Load cart on page load
+    loadCart();
+    </script>
+
+        <!-- FOOTER -->
+        <footer>
+            <p>© 2026 Book Nest | All Rights Reserved</p>
+        </footer>
+        
+</body>
+</html>
